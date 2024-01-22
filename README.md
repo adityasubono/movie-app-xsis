@@ -6,19 +6,11 @@
    ```
 2. Install packages
    ```sh
-   yarn
+   npm install
    ```
-3. Install Husky
+3. running application
    ```sh
-   yarn husky install
-   ```
-4. Setup Husky
-   ```sh
-   chmod ug+x .husky/*
-   ```
-5. Start the app
-   ```sh
-   yarn dev
+   npm run dev
    ```
 
 ## Approach
