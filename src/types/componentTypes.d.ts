@@ -3,7 +3,6 @@ interface ITrending {
   title: string;
   image: string;
   rating: number;
-  site: string;
 }
 
 interface IMovieItem {
