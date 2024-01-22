@@ -1,4 +1,3 @@
-import PageTitle from '../components/atoms/PageTitle';
 import NowPlaying from '../components/organisms/NowPlaying';
 import Popular from '../components/organisms/Popular';
 import Trending from '../components//organisms/Trending';

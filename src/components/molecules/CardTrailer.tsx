@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { PlayIcon, StarIcon } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
+import React, {useEffect, useRef} from 'react';
+import {PlayIcon, StarIcon} from 'lucide-react';
+import {useQuery} from '@tanstack/react-query';
 import movieService from '@/services/movie.service';
 
 type Props = {
@@ -148,20 +148,15 @@ const useVideosQuery = (id: string) =>
     queryFn: () => movieService.getVideos(id),
     select(data) {
       const result = data.data.results.filter(
-        (item: IApiVideo) =>
-          (item.type === 'Trailer' && item.name === 'Official Trailer') ||
-          item.name === 'Official Trailer',
-      );
+        (item: IApiVideo) => (item.type === 'Trailer' && item.name === 'Official Trailer') || item.name === 'Official Trailer');
       const item = result[0];
-      const movie = {
+      return {
         id: item?.id,
         key: item?.key,
         name: item?.name,
         site: item?.site,
         type: item?.type,
       };
-
-      return movie;
     },
     keepPreviousData: true,
   });

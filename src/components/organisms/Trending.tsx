@@ -9,6 +9,7 @@ const Trending = () => {
     const { selector, setSelector, selects } = useSelector();
     const { isLoading, data } = useTrendingQuery(selector);
 
+
   if (isLoading)
     return (
       <div data-testid="trending-loading">
@@ -66,7 +67,6 @@ export const useTrendingQuery = (selector: string) =>
         title: item.title,
         image: `https://www.themoviedb.org/t/p/w1280${item.backdrop_path}`,
         rating: item.vote_average,
-          site: item.
       }));
 
       return items;
@@ -74,4 +74,10 @@ export const useTrendingQuery = (selector: string) =>
     keepPreviousData: true,
   });
 
+
+
+
+
 export default Trending;
+
+

@@ -1,6 +1,6 @@
 import movieService from '@/services/movie.service';
-import { useQuery } from '@tanstack/react-query';
-import { Loader } from 'lucide-react';
+import {useQuery} from '@tanstack/react-query';
+import {Loader} from 'lucide-react';
 import CardTrailer from '../molecules/CardTrailer';
 
 function NowPlaying() {
@@ -50,15 +50,13 @@ export const useNowPlayingQuery = () =>
     queryKey: ['now-playing'],
     queryFn: movieService.getNowPlaying,
     select(data) {
-      const items = data.data.results.map((item: IApiMovieItem) => ({
-        id: item.id,
-        title: item.title,
-        image: `https://www.themoviedb.org/t/p/w1280${item.backdrop_path}`,
-        rating: item.vote_average,
+        return data.data.results.map((item: IApiMovieItem) => ({
+          id: item.id,
+          title: item.title,
+          image: `https://www.themoviedb.org/t/p/w1280${item.backdrop_path}`,
+          rating: item.vote_average,
           overview: item.overview
       }));
-
-      return items;
     },
     keepPreviousData: true,
   });

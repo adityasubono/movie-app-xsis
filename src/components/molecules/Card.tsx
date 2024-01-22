@@ -1,8 +1,6 @@
-import React, {Fragment, useEffect, useRef, useState} from 'react';
+import React, {Fragment, useRef, useState} from 'react';
 import {PlayIcon, StarIcon} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import {Dialog, Transition} from "@headlessui/react";
-import {ExclamationTriangleIcon} from "@heroicons/react/16/solid";
 import {useQuery} from "@tanstack/react-query";
 import movieService from "@/services/movie.service.ts";
 
@@ -13,6 +11,7 @@ type Props = {
   title: string;
   image: string;
   rating: number;
+  key: string;
 };
 
 
@@ -27,6 +26,7 @@ const Card: React.FC<Props> = ({
   // const navigate = useNavigate();
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
+  const { isLoading, data } = useVideosQuery(id);
 
 
   const handleClick = () => {
@@ -50,6 +50,9 @@ const Card: React.FC<Props> = ({
         alt={title}
         loading="lazy"
       />
+
+
+
       <div className="tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-z-10 tw-rounded-b-xl tw-bg-slate-300 tw-bg-opacity-5 tw-p-2 tw-backdrop-blur-md tw-backdrop-filter">
         <div
           data-testid={`${name}-title`}
@@ -65,8 +68,11 @@ const Card: React.FC<Props> = ({
         </div>
       </div>
 
+
+
+
       <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="tw-relative  tw-z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+        <Dialog as="div" className="tw-relative  tw-z-30" initialFocus={cancelButtonRef} onClose={setOpen}>
           <Transition.Child
               as={Fragment}
               enter="tw-ease-out tw-duration-300"
@@ -96,21 +102,12 @@ const Card: React.FC<Props> = ({
                       <div className="tw-mt-3 tw-text-center sm:tw-ml-4 sm:tw-mt-0 sm:tw-text-left">
 
 
+
                         <Dialog.Description>
-                          <img className="tw-object-cover tw-object-center tw-w-full tw-h-full"
-                               src={image}
-                               alt={title}
-                               loading="lazy"
-                          />
+                          <iframe className=" tw-w-full tw-aspect-video"
+                                  src={`https://www.youtube.com/embed/${data?.key}`}>
+                          </iframe>
 
-
-                          {/*<video className="tw-h-full tw-w-full tw-rounded-lg" controls>*/}
-                          {/*  <source*/}
-                          {/*      src={`https://www.youtube.com/watch?v=${title}`}*/}
-                          {/*      type="video/mp4"*/}
-                          {/*  />*/}
-                          {/*  Your browser does not support the video tag.*/}
-                          {/*</video>*/}
                         </Dialog.Description>
 
                         <Dialog.Title as="h3"
@@ -157,5 +154,24 @@ const Card: React.FC<Props> = ({
 };
 
 export default Card;
+
+const useVideosQuery = (id: number) => useQuery({
+      queryKey: ['videos', id],
+      queryFn: () => movieService.getVideos(id),
+      select(data) {
+        const result = data.data.results.filter(
+            (item: IApiVideo) => (item.type === 'Trailer' && item.name === 'Official Trailer') || item.name === 'Official Trailer');
+        const item = result[0];
+        return {
+          id: item?.id,
+          key: item?.key,
+          name: item?.name,
+          site: item?.site,
+          type: item?.type,
+        };
+      },
+      keepPreviousData: true,
+    });
+
 
 

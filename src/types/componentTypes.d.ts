@@ -7,6 +7,7 @@ interface ITrending {
 }
 
 interface IMovieItem {
+  overview: string;
   id: string;
   title: string;
   image: string;
