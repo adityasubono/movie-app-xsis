@@ -1,5 +1,5 @@
 import CardList from './CardList';
-import { useQuery } from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import movieService from '@/services/movie.service';
 import Loader from '@/components/atoms/Loader';
 import {useState} from 'react';
@@ -21,7 +21,7 @@ const Trending = () => {
     <div className="tw-px-4">
       <div className="tw-flex tw-items-center tw-justify-between md:tw-justify-normal md:tw-gap-10">
         <div className="tw-text-white-900 tw-py-4 tw-text-base tw-font-bold md:tw-text-lg">
-          Trending
+          Latest
         </div>
         <div className="tw-flex tw-space-x-4 tw-rounded-full tw-border tw-border-solid tw-border-slate-500 tw-px-1 tw-py-1">
           {selects.map((item, index) => (
@@ -62,14 +62,12 @@ export const useTrendingQuery = (selector: string) =>
     queryKey: ['trending', selector],
     queryFn: async () => await movieService.getTrending(selector),
     select(data) {
-      const items = data.data.results.map((item: IApiMovieItem) => ({
-        id: item.id,
-        title: item.title,
-        image: `https://www.themoviedb.org/t/p/w1280${item.backdrop_path}`,
-        rating: item.vote_average,
+        return data.data.results.map((item: IApiMovieItem) => ({
+          id: item.id,
+          title: item.title,
+          image: `https://www.themoviedb.org/t/p/w1280${item.backdrop_path}`,
+          rating: item.vote_average,
       }));
-
-      return items;
     },
     keepPreviousData: true,
   });

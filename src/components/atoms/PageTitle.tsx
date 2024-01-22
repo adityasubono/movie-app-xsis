@@ -1,7 +1,7 @@
 import { HomeIcon, SearchIcon } from 'lucide-react';
 
 type Props = {
-  title: 'Home' | 'Search Movies' | 'Other';
+  title: 'Home' | 'Search Movies' | 'Movies Page' | 'Genre Page' | 'Series Page';
 };
 
 const PageTitle: React.FC<Props> = ({ title }: Props) => {

@@ -1,5 +1,5 @@
 import React, {Fragment, useRef, useState} from 'react';
-import {PlayIcon, StarIcon} from 'lucide-react';
+import {StarIcon} from 'lucide-react';
 import {Dialog, Transition} from "@headlessui/react";
 import {useQuery} from "@tanstack/react-query";
 import movieService from "@/services/movie.service.ts";
@@ -11,7 +11,6 @@ type Props = {
   title: string;
   image: string;
   rating: number;
-  key: string;
 };
 
 
@@ -26,7 +25,7 @@ const Card: React.FC<Props> = ({
   // const navigate = useNavigate();
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
-  const { isLoading, data } = useVideosQuery(id);
+  const {data } = useVideosQuery(id);
 
 
   const handleClick = () => {

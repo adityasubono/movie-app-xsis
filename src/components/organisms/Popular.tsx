@@ -16,7 +16,7 @@ const Popular = () => {
   return (
     <div className="tw-px-4">
       <div className="tw-text-white-900 tw-py-4 tw-text-base tw-font-bold md:tw-text-lg">
-        Popular
+        Action
       </div>
       <div>
         <CardList name="popular" data={data} />

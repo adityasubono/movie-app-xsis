@@ -1,6 +1,4 @@
-import DetailPage from '@/pages/DetailPage';
 import HomePage from '@/pages/HomePage';
-import OtherPage from '@/pages/OtherPage';
 import SearchPage from '@/pages/SearchPage';
 import MainLayout from '@/templates/MainLayout';
 import { createBrowserRouter } from 'react-router-dom';
@@ -32,14 +30,6 @@ export const router = createBrowserRouter([
       {
         path: '/search',
         element: <SearchPage />,
-      },
-      {
-        path: '/other',
-        element: <OtherPage />,
-      },
-      {
-        path: '/detail/:movieId',
-        element: <DetailPage />,
       },
     ],
   },

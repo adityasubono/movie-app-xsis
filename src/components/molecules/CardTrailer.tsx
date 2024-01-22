@@ -53,7 +53,7 @@ const CardTrailer: React.FC<Props> = ({
 
         <div className="tw-flex tw-justify-end">
           <div
-              className=" tw-my-8 tw-w-4/12  tw-rounded-lg tw-bg-slate-300 tw-bg-opacity-5 tw-p-2 tw-backdrop-blur-md tw-backdrop-filter">
+              className="tw-my-16 tw-w-5/12  tw-rounded-lg tw-bg-slate-300 tw-bg-opacity-5 tw-p-2 tw-backdrop-blur-md tw-backdrop-filter">
             <div
                 data-testid={`${section}-title`}
                 className="tw-truncate tw-text-sm tw-font-bold md:tw-text-lg"
